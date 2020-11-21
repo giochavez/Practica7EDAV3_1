@@ -16,8 +16,8 @@ int main(){
         opcion = leerOpcion(); /*definimos la existencia */
         switch (opcion) {
             case 1:
-                system("cls");
-                system("color 09");
+                system("cls"); //ESTA OPERACION LIMPIA LA PANTALLA para no amontonar las cosas al correr
+                system("color 09"); //ESTA OPERACION CAMBIA LAS LETRAS DE COLOR para darle color a la vida e identificar cuando entramos y salimos de una operacion
                 printf("Agregar H%croe:\n", 130);
                 leerHeroe(&unHeroe); //Leemos heroe y lo que recibe es la direccion de unHeroe
                 agregarNodoInicio(&misHeroes, &unHeroe); //Despues de leerlo agregamos el heroe al inicio de la lista
@@ -42,7 +42,7 @@ int main(){
             case 4:
                 system("cls");
                 system("color 0D");
-                ataqueAyB(&misHeroes); //Recibe la lista
+                ataqueAyB(&misHeroes); //Recibe la lista de heroes para buscar a los oponentes
                 recorre(&misHeroes, imprime);
                 system("PAUSE");
                 break;
@@ -60,3 +60,4 @@ int main(){
     } while(opcion != 0);
     return 0;
 }
+

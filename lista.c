@@ -137,7 +137,8 @@ void menu() {
     printf("(1) Agregar H%croe.\n", 130);
     printf("(2) Mostrar h%croes.\n", 130);
     printf("(3) Mostrar h%croes mayores a...\n", 130);
-    printf("(4) H%croe A ataca a H%croe B\n", 130, 130);
+    printf("(4) Mostrar h%croes de mayor a menor.\n", 130);
+    printf("(5) H%croe A ataca a H%croe B\n", 130, 130);
     printf("(0) SALIR\n");
 }
 
@@ -147,11 +148,11 @@ int leerOpcion() {
         menu();
         printf("%cCu%cl es tu elecci%cn? ", 168, 160, 162);
         scanf("%d",&respuesta);
-        if (respuesta<0 || respuesta>4) {
+        if (respuesta<0 || respuesta>5) {
             printf("Hay un error en tu elecci%cn!\n", 162);
             printf("Valores s%clo entre 0 y 5 por favor\n", 162);
         }
-    } while(respuesta<0 || respuesta>4);
+    } while(respuesta<0 || respuesta>5);
     printf("\n");
     return respuesta;
 
@@ -223,3 +224,41 @@ void ataqueAyB(Lista *pLista){ //Recorremos la lista de inicio a fin
     system("PAUSE");
     return;
 }
+void recorreParaAcomodo(Lista *pLista,int (comparacion) (Heroe *h1, Heroe *h2), void (operacion) (Heroe *h) ){
+    Nodo *pNodo;
+    Nodo *pAntes;
+    Nodo *pTemp;
+    int k,j;
+    if (vacia(pLista)==1) {
+        printf("Lista vacia!\n");
+        return;
+    }
+    pNodo = pLista->inicio;
+    while(pNodo!=NULL){
+        k++;
+        pNodo = pNodo->siguiente;
+    }
+    for(j=0;j<k;j++){ //Implemente burbuja, en donde el programa compara datos de dos en dos hasta terminar todos los datos y los va acomodando
+        pAntes = pLista->inicio;
+        pNodo = pLista->inicio->siguiente;
+        while (pNodo != NULL) { //Mientras no lleguemos al final de la lista
+            if(comparacion(pAntes->informacion,pNodo->informacion)==1){ //Metemos a comparacion la vida de nuestros Heroes en burbuja
+                pTemp = pAntes; //en caso de retornar 1, nuestro nodo temporal es igual al anterior
+                pTemp->siguiente = pNodo->siguiente; //Vamos haciendo el acomodo de los heroes de 2 en dos
+                pNodo->siguiente = pLista->inicio; //Comenzamos como si fuera el inicio
+                pLista->inicio = pNodo;
+            }
+            else{
+                pTemp = pNodo; //Si no, vamos avanzando el nodo temporal
+            }
+            pAntes = pTemp;
+            pNodo = pTemp->siguiente;
+        }
+    }
+    pNodo = pLista->inicio;
+    while (pNodo != NULL) { //Mientras llegamos al final, imprimimos los heroes
+        operacion(pNodo->informacion);
+        pNodo = pNodo->siguiente;
+    }
+}
+

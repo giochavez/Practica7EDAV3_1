@@ -26,3 +26,9 @@ int igualdadHeroe(char* s, Heroe* h){ //Recibimos el nombre a comparar y los nom
         return 1;
     return 0; //si no son iguales retornamos 0
 }
+int comparaVida(Heroe *h1, Heroe *h2){
+    if(h1->vida < h2->vida){ //Si el primer heroe es menor al segundo heroe retornamos 1
+        return 1;
+    }
+    return 0;
+}

@@ -50,7 +50,6 @@ int main(){
                 system("cls");
                 system("color 0D");
                 ataqueAyB(&misHeroes); //Recibe la lista de heroes para buscar a los oponentes
-                recorre(&misHeroes, imprime);
                 system("PAUSE");
                 break;
             case 0:

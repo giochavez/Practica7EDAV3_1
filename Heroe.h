@@ -9,7 +9,7 @@ typedef struct{ //definimos la estructura de heroe
 
 void leerHeroe(Heroe *h);
 void imprime(Heroe *h);
-
+int comparaVida(Heroe *h1, Heroe *h2);
 int igualdadHeroe(char* s, Heroe* h);
 
 #endif // HEROE_H_INCLUDED

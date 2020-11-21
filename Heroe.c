@@ -21,8 +21,8 @@ void imprime(Heroe *h){ //imprimimos al heroe y todas sus caracteristicas
     printf("\n");
 }
 
-int igualdadHeroe(char* s, Heroe* h){
-    if (strcmp(s, h->nombre)==0)
+int igualdadHeroe(char* s, Heroe* h){ //Recibimos el nombre a comparar y los nombres de los heroes
+    if (strcmp(s, h->nombre)==0) //Comparamos los nombres, letra por letra y si son iguales retornamos 1
         return 1;
-    return 0;
+    return 0; //si no son iguales retornamos 0
 }

@@ -3,7 +3,7 @@
 #include "Heroe.h"
 #include "nodo.h"
 
-struct lista { //definimos la estructura tipo lista con tamaño, y dos nodos de inicio y fin
+struct lista { //definimos la estructura tipo lista con tamaÃ±o, y dos nodos de inicio y fin
     int tam;
     Nodo *inicio;
     Nodo *fin;
@@ -24,5 +24,5 @@ int comparaMayorVida(void *dato, Heroe *h);
 int leerOpcion();
 void menu();
 void ataqueAyB(Lista *pLista);
-
+void recorreParaAcomodo(Lista *pLista,int (comparacion) (Heroe *h1, Heroe *h2), void (operacion) (Heroe *h) );
 #endif // LISTA_H_INCLUDED

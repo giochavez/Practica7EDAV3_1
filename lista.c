@@ -131,8 +131,8 @@ int comparaMayorVida(void *dato, Heroe *h) { //Primer dato mayor al segundo, com
     return 0;
 }
 void menu() {
-    system("cls");
-    system("color 07");
+    system("cls"); //Limpiamos la pantalla para no amontonar las cosas y evitar confusiones
+    system("color 07"); //Le ponemos al sistema color negro de fondo y letras blancas para hacer enfasis en que volvimos al menu
     printf("       MEN%c DE H%cROES\n", 233, 144);
     printf("(1) Agregar H%croe.\n", 130);
     printf("(2) Mostrar h%croes.\n", 130);
@@ -160,47 +160,47 @@ void recorreVidaMayor(Lista *pLista, void *d1, int (comparacion)(void *d1, Heroe
     Nodo *pNodo;
 
     if (vacia(pLista)==1) {
-        printf("Lista vac%ca!\n", 161);
+        printf("Lista vac%ca!\n", 161); //Si la lista esta vacia, el programa nos lo hara saber
         return;
     }
     pNodo = pLista->inicio;
-    while (pNodo != NULL) {
-        if(comparacion(d1, pNodo->informacion)==1)
-            operacion(pNodo->informacion);
-        pNodo = pNodo->siguiente;
+    while (pNodo != NULL) { //Mientras nodo no llegue al final de la lista
+        if(comparacion(d1, pNodo->informacion)==1) //Va a comparar vida por vida que sean mayores a lo que ingreso el usuario
+            operacion(pNodo->informacion); //En caso de ser mayor, se imprimira en la pantalla
+        pNodo = pNodo->siguiente; //Continua su busqueda en la lista
     }
 }
 
-void ataqueAyB(Lista *pLista){
-    char nombreA[100], nombreB[100];
-    Nodo* nA;
+void ataqueAyB(Lista *pLista){ //Recorremos la lista de inicio a fin
+    char nombreA[100], nombreB[100]; //Declaramos que vamos a recibir dos nombres
+    Nodo* nA; //Nodos temporales que buscaran a los heroes
     Nodo* nB;
-    Nodo* nodo;
-    Heroe* hA;
+    Nodo* nodo; //Nodo de apoyo
+    Heroe* hA; //Nuestros heroes en A y B
     Heroe* hB;
-    nodo = pLista->inicio;
+    nodo = pLista->inicio; //Empezamos la busqueda desde el inicio
     printf("Ingresa el nombre del H%croe A:\n", 130);
     scanf("%s", nombreA);
     printf("Ingresa el nombre del H%croe B:\n", 130);
     scanf("%s", nombreB);
     printf("\n");
-    system("PAUSE");
-    nA = buscar(pLista, nombreA, igualdadHeroe);
-    nB = buscar(pLista, nombreB, igualdadHeroe);
-    hA = nA -> informacion;
-    hB = nB -> informacion;
-    if (hA->ataque >= hB->vida){
-        printf("\n\nEl h%croe %s ha sido asesinado por %s\n", 130, hB->nombre, hA->nombre);
-        system("PAUSE");
+    system("PAUSE"); //el sistema entra en pausa
+    nA = buscar(pLista, nombreA, igualdadHeroe); //El nA buscara al primer heroe por la lista dandole como referencia el nombre del heroe que atacara
+    nB = buscar(pLista, nombreB, igualdadHeroe); //El nB buscara al segundo heroe por la lista dandole como referencia el nombre del atacado
+    hA = nA -> informacion; //Le asignamos al Heroe a la informacion del nodo que encontro al primer heroe
+    hB = nB -> informacion; //Le asignamos al Heroe a la informacion del nodo que encontro al segundo heroe
+    if (hA->ataque >= hB->vida){ //Si la cantidad de ataque del heroe A es mayor o igual a la vida del heroe B
+        printf("\n\nEl h%croe %s ha sido asesinado por %s\n\n", 130, hB->nombre, hA->nombre); //Informamos al usuario que ese heroe murio
+        system("PAUSE"); //El sistema entra en pausa temporal para que el usuario vea el mensaje
         //Si el nodo inicial concuerda con el nodo del heroe B
         if (nodo == nB){
             pLista->inicio = nB->siguiente;
             nB->siguiente = NULL;
             free(nB->informacion);
-            free(nB);
+            free(nB); //Liberamos a b para poder usarlo en otra ocasion
             return;
         }
-        //Si el heroe b no est� en en el nodo inicial
+        //Si el heroe b no está en en el nodo inicial
         while (nodo->siguiente != nB){
             nodo = nodo->siguiente;
         }
@@ -208,18 +208,18 @@ void ataqueAyB(Lista *pLista){
         if (nB->siguiente == NULL){
             pLista->fin = nodo;
             free(nB->informacion);
-            free(nB);
+            free(nB); //Liberamos a b para poder usarlo en otra ocasion
             return;
         }
         nodo->siguiente = nodo->siguiente->siguiente;
         nB->siguiente = NULL;
         free(nB->informacion);
-        free(nB);
+        free(nB); //Liberamos a b para poder usarlo en otra ocasion
         return;
     }
     printf("\nA %s lo atac%c %s y ha sufrido %d puntos de da%co.", hB->nombre, 162, hA->nombre, hA->ataque, 164);
-    hB->vida -= hA->ataque;
-    printf("\nA %s le restan: %d puntos de vida\n", hB->nombre, hB->vida);
+    hB->vida -= hA->ataque; //Hacemos la operacion que conlleva a la pelea
+    printf("\nA %s le restan: %d puntos de vida\n", hB->nombre, hB->vida); //informamos al usuario el daño sufrido del heroe
     system("PAUSE");
     return;
 }
